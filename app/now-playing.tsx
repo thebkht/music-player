@@ -1,4 +1,5 @@
-'use client';
+"use client";
+
 
 import { useState, useRef, useEffect } from 'react';
 import { useActionState } from 'react';
@@ -7,6 +8,7 @@ import { updateTrackAction, updateTrackImageAction } from './actions';
 import { usePlayback } from './playback-context';
 import { songs } from '@/lib/db/schema';
 import { cn } from '@/lib/utils';
+
 
 export function NowPlaying() {
   const { currentTrack } = usePlayback();

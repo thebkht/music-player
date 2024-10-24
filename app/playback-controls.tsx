@@ -6,6 +6,7 @@ import {
   Heart,
   Pause,
   Play,
+  Repeat,
   SkipBack,
   SkipForward,
   Volume2,
@@ -215,6 +216,29 @@ export function Volume() {
   );
 }
 
+export function LoopButton() {
+  const { audioRef } = usePlayback();
+  const [isLooping, setIsLooping] = useState(false);
+
+  const toggleLoop = () => {
+    if (audioRef.current) {
+      audioRef.current.loop = !audioRef.current.loop;
+      setIsLooping(audioRef.current.loop);
+    }
+  };
+
+  return (
+    <Button
+      variant="ghost"
+      size="icon"
+      className={`h-8 w-8 ${isLooping ? "text-blue-500" : "text-gray-400"}`}
+      onClick={toggleLoop}
+    >
+      <Repeat className="w-4 h-4" />
+    </Button>
+  );
+}
+
 export function PlaybackControls() {
   let {
     currentTrack,
@@ -334,6 +358,7 @@ export function PlaybackControls() {
         <ProgressBar />
       </div>
       <div className="flex items-center justify-end space-x-2 w-1/3">
+        <LoopButton />
         <Volume />
       </div>
     </div>

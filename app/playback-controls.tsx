@@ -24,13 +24,13 @@ export function TrackInfo() {
           <img
             src={currentTrack.imageUrl || "/placeholder.svg"}
             alt="Now playing"
-            className="w-14 h-14 object-cover"
+            className="w-10 h-10 object-cover"
           />
           <div className="flex-shrink min-w-0">
-            <div className="text-base font-medium truncate max-w-[120px] sm:max-w-[200px] text-gray-200">
+            <div className="text-sm font-medium truncate max-w-[120px] sm:max-w-[200px] text-gray-200">
               {currentTrack.name}
             </div>
-            <div className="text-sm text-gray-400 truncate max-w-[120px] sm:max-w-[200px]">
+            <div className="text-xs text-gray-400 truncate max-w-[120px] sm:max-w-[200px]">
               {currentTrack.artist}
             </div>
           </div>
@@ -116,7 +116,7 @@ export function ProgressBar() {
 
   return (
     <div className="flex items-center w-full mt-1">
-      <span className="text-sm tabular-nums text-gray-400">
+      <span className="text-xs tabular-nums text-gray-400">
         {formatTime(currentTime)}
       </span>
       <div
@@ -131,7 +131,7 @@ export function ProgressBar() {
           }}
         ></div>
       </div>
-      <span className="text-sm tabular-nums text-gray-400">
+      <span className="text-xs tabular-nums text-gray-400">
         {formatTime(duration)}
       </span>
     </div>

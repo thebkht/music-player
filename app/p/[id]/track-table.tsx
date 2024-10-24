@@ -43,24 +43,7 @@ function TrackRow({
   let { playlists } = usePlaylist();
 
   let [isFocused, setIsFocused] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  useEffect(() => {
-    const fetchSession = async () => {
-      try {
-        const response = await fetch("https://bkhtdev.com/api/auth/session");
-        const data = await response.json();
-        const isAdmin =
-          data.user?.email === "me@bkhtdev.com" ||
-          data.user?.email === "b.yusupoff001@gmail.com";
-        setIsAdmin(isAdmin);
-      } catch (error) {
-        console.error("Error fetching session:", error);
-      }
-    };
-
-    fetchSession();
-  }, []);
+  let isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
   let isCurrentTrack = currentTrack?.name === track.name;
 
   function onClickTrackRow(e: React.MouseEvent) {
@@ -142,7 +125,7 @@ function TrackRow({
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
-                disabled={!isAdmin}
+                disabled={isProduction}
                 variant="ghost"
                 size="icon"
                 className="h-5 w-5 text-gray-400 hover:text-white focus:text-white"

@@ -10,24 +10,6 @@ import { cn } from "@/lib/utils";
 
 export function NowPlaying() {
   const { currentTrack } = usePlayback();
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  useEffect(() => {
-    const fetchSession = async () => {
-      try {
-        const response = await fetch("https://bkhtdev.com/api/auth/session");
-        const data = await response.json();
-        const isAdmin =
-          data.user?.email === "me@bkhtdev.com" ||
-          data.user?.email === "b.yusupoff001@gmail.com";
-        setIsAdmin(isAdmin);
-      } catch (error) {
-        console.error("Error fetching session:", error);
-      }
-    };
-
-    fetchSession();
-  }, []);
   const [imageState, imageFormAction, imagePending] = useActionState(
     updateTrackImageAction,
     {
@@ -102,7 +84,6 @@ export function NowPlaying() {
               {imagePending ? (
                 <Loader2 className="w-6 h-6 text-white animate-spin" />
               ) : (
-                isAdmin &&
                 showPencil && (
                   <PencilIcon className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
                 )
@@ -198,25 +179,6 @@ export function EditableInput({
     }
   }, [state.success]);
 
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  useEffect(() => {
-    const fetchSession = async () => {
-      try {
-        const response = await fetch("https://bkhtdev.com/api/auth/session");
-        const data = await response.json();
-        const isAdmin =
-          data.user?.email === "me@bkhtdev.com" ||
-          data.user?.email === "b.yusupoff001@gmail.com";
-        setIsAdmin(isAdmin);
-      } catch (error) {
-        console.error("Error fetching session:", error);
-      }
-    };
-
-    fetchSession();
-  }, []);
-
   function handleSubmit() {
     if (value.trim() === "" || value === initialValue) {
       setIsEditing(false);
@@ -270,7 +232,7 @@ export function EditableInput({
         ) : (
           <div
             className="w-full cursor-pointer truncate block"
-            onClick={() => setIsEditing(isAdmin ? true : false)}
+            onClick={() => setIsEditing(true)}
             role="button"
             tabIndex={0}
             onKeyDown={(e) => {

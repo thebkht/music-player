@@ -2,7 +2,7 @@
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Plus, MoreVertical, Trash } from "lucide-react";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -19,31 +19,12 @@ import { Playlist } from "@/lib/db/types";
 import { v4 as uuidv4 } from "uuid";
 import { SearchInput } from "./search";
 
-let isAdmin = false;
+let isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
 
 function PlaylistRow({ playlist }: { playlist: Playlist }) {
   let pathname = usePathname();
   let router = useRouter();
   let { deletePlaylist } = usePlaylist();
-
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  useEffect(() => {
-    const fetchSession = async () => {
-      try {
-        const response = await fetch("https://bkhtdev.com/api/auth/session");
-        const data = await response.json();
-        const isAdmin =
-          data.user?.email === "me@bkhtdev.com" ||
-          data.user?.email === "b.yusupoff001@gmail.com";
-        setIsAdmin(isAdmin);
-      } catch (error) {
-        console.error("Error fetching session:", error);
-      }
-    };
-
-    fetchSession();
-  }, []);
 
   async function handleDeletePlaylist(id: string) {
     deletePlaylist(id);
@@ -83,7 +64,7 @@ function PlaylistRow({ playlist }: { playlist: Playlist }) {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-36">
             <DropdownMenuItem
-              disabled={!isAdmin}
+              disabled={isProduction}
               onClick={() => handleDeletePlaylist(playlist.id)}
               className="text-sm"
             >
@@ -151,7 +132,7 @@ export function OptimisticPlaylists() {
           </Link>
           <form action={addPlaylistAction}>
             <Button
-              disabled={!isAdmin}
+              disabled={isProduction}
               variant="ghost"
               size="icon"
               className="h-6 w-6"

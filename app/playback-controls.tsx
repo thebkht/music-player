@@ -217,7 +217,7 @@ export function Volume() {
 }
 
 export function LoopButton() {
-  const { audioRef } = usePlayback();
+  const { audioRef, currentTrack } = usePlayback();
   const [isLooping, setIsLooping] = useState(false);
 
   const toggleLoop = () => {
@@ -231,8 +231,9 @@ export function LoopButton() {
     <Button
       variant="ghost"
       size="icon"
-      className={`h-8 w-8 ${isLooping ? "text-blue-500" : "text-gray-400"}`}
+      className={`h-8 w-8 ${isLooping ? "text-white" : "text-gray-400"}`}
       onClick={toggleLoop}
+      disabled={!currentTrack}
     >
       <Repeat className="w-4 h-4" />
     </Button>

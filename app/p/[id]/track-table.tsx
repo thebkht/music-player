@@ -82,7 +82,7 @@ function TrackRow({
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
     >
-      <td className="py-4 tabular-nums w-10 text-center">
+      <td className="py-[2px] pl-3 pr-2 tabular-nums w-10 text-center">
         {isCurrentTrack && isPlaying ? (
           <div className="flex items-end justify-center space-x-[2px] size-[0.65rem] mx-auto">
             <div className="w-1 bg-neutral-600 animate-now-playing-1"></div>
@@ -93,11 +93,11 @@ function TrackRow({
           <span className="text-gray-400">{index + 1}</span>
         )}
       </td>
-      <td className="py-4">
+      <td className="py-[2px] px-2">
         <div className="flex items-center">
-          <div className="relative size-10 mr-3">
+          <div className="relative size-5 mr-2">
             <Image
-              src={track.imageUrl || "/placeholder.svg?height=40&width=40"}
+              src={track.imageUrl || "/placeholder.svg"}
               alt={`${track.album} cover`}
               fill
               className="object-cover"
@@ -111,16 +111,16 @@ function TrackRow({
           </div>
         </div>
       </td>
-      <td className="py-4 hidden sm:table-cell text-[#d1d5db] max-w-40 truncate">
+      <td className="py-[2px] px-2 hidden sm:table-cell text-[#d1d5db] max-w-40 truncate">
         {highlightText(track.artist, query)}
       </td>
-      <td className="py-4 hidden md:table-cell text-[#d1d5db]">
+      <td className="py-[2px] px-2 hidden md:table-cell text-[#d1d5db]">
         {highlightText(track.album!, query)}
       </td>
-      <td className="py-4 tabular-nums text-[#d1d5db]">
+      <td className="py-[2px] px-2 tabular-nums text-[#d1d5db]">
         {formatDuration(track.duration)}
       </td>
-      <td className="py-4">
+      <td className="py-[2px] px-2">
         <div className="opacity-0 group-hover:opacity-100 transition-opacity">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -128,7 +128,7 @@ function TrackRow({
                 disabled={isProduction}
                 variant="ghost"
                 size="icon"
-                className="h-6 w-6 text-gray-400 hover:text-white focus:text-white"
+                className="h-5 w-5 text-gray-400 hover:text-white focus:text-white"
               >
                 <MoreHorizontal className="size-4" />
                 <span className="sr-only">Track options</span>
@@ -136,7 +136,7 @@ function TrackRow({
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48">
               <DropdownMenuItem
-                className="text-sm"
+                className="text-xs"
                 onClick={(e) => {
                   e.stopPropagation();
                   if (isCurrentTrack) {
@@ -159,14 +159,14 @@ function TrackRow({
                 )}
               </DropdownMenuItem>
               <DropdownMenuSub>
-                <DropdownMenuSubTrigger className="text-sm">
+                <DropdownMenuSubTrigger className="text-xs">
                   <Plus className="mr-2 size-3" />
                   Add to Playlist
                 </DropdownMenuSubTrigger>
                 <DropdownMenuSubContent className="w-48">
                   {playlists.map((playlist) => (
                     <DropdownMenuItem
-                      className="text-sm"
+                      className="text-xs"
                       key={playlist.id}
                       onClick={(e) => {
                         e.stopPropagation();
@@ -211,17 +211,17 @@ export function TrackTable({
   return (
     <table
       ref={tableRef}
-      className="w-full text-sm"
+      className="w-full text-xs"
       onClick={() => setActivePanel("tracklist")}
     >
       <thead className="sticky top-0 bg-[#0A0A0A] z-10 border-b border-[#282828]">
         <tr className="text-left text-gray-400">
-          <th className="py-3 pl-3 pr-2 font-medium w-10">#</th>
-          <th className="py-3 font-medium">Title</th>
-          <th className="py-3 font-medium hidden sm:table-cell">Artist</th>
-          <th className="py-3 font-medium hidden md:table-cell">Album</th>
-          <th className="py-3 font-medium">Duration</th>
-          <th className="py-3 font-medium w-8"></th>
+          <th className="py-2 pl-3 pr-2 font-medium w-10">#</th>
+          <th className="py-2 px-2 font-medium">Title</th>
+          <th className="py-2 px-2 font-medium hidden sm:table-cell">Artist</th>
+          <th className="py-2 px-2 font-medium hidden md:table-cell">Album</th>
+          <th className="py-2 px-2 font-medium">Duration</th>
+          <th className="py-2 px-2 font-medium w-8"></th>
         </tr>
       </thead>
       <tbody className="mt-[1px]">

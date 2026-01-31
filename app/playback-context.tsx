@@ -25,7 +25,7 @@ type PlaybackContextType = {
   setCurrentTime: (time: number) => void;
   setDuration: (duration: number) => void;
   setPlaylist: (songs: Song[]) => void;
-  audioRef: React.RefObject<HTMLAudioElement>;
+  audioRef: React.RefObject<HTMLAudioElement | null>;
   activePanel: Panel;
   setActivePanel: (panel: Panel) => void;
   registerPanelRef: (

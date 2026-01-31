@@ -75,7 +75,7 @@ export let addSongToPlaylist = async (
   let result = await db
     .insert(playlistSongs)
     .values({ playlistId, songId, order });
-  revalidateTag('playlists');
+  revalidateTag('playlists', 'max');
   return result;
 };
 
@@ -91,7 +91,7 @@ export let removeSongFromPlaylist = async (
         eq(playlistSongs.songId, songId)
       )
     );
-  revalidateTag('playlists');
+  revalidateTag('playlists', 'max');
   return result;
 };
 
@@ -104,7 +104,7 @@ export let createPlaylist = async (
     .insert(playlists)
     .values({ id, name, coverUrl })
     .returning();
-  revalidateTag('playlists');
+  revalidateTag('playlists', 'max');
   return result[0];
 };
 
@@ -118,7 +118,7 @@ export let updatePlaylist = async (
     .set({ name, coverUrl, updatedAt: new Date() })
     .where(eq(playlists.id, id))
     .returning();
-  revalidateTag('playlists');
+  revalidateTag('playlists', 'max');
   return result[0];
 };
 
@@ -128,7 +128,7 @@ export let deletePlaylist = async (id: string) => {
   // Then delete the playlist
   let result = await db.delete(playlists).where(eq(playlists.id, id));
 
-  revalidateTag('playlists');
+  revalidateTag('playlists', 'max');
   return result;
 };
 

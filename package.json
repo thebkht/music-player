@@ -47,5 +47,11 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.2"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
   }
 }

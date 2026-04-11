@@ -1,6 +1,6 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
-import localFont from 'next/font/local';
+import { Inter } from 'next/font/google';
 import { Suspense } from 'react';
 import { NowPlaying } from './now-playing';
 import { PlaybackProvider } from './playback-context';
@@ -22,10 +22,7 @@ export const viewport: Viewport = {
   themeColor: '#0A0A0A',
 };
 
-const inter = localFont({
-  src: './fonts/InterVariable.woff2',
-  display: 'swap',
-});
+const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({
   children,

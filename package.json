@@ -32,7 +32,7 @@
     "drizzle-orm": "^0.45.2",
     "lucide-react": "^1.8.0",
     "music-metadata": "^11.12.3",
-    "next": "16.2.3",
+    "next": "16.2.4",
     "postcss": "^8.5.9",
     "postgres": "^3.4.9",
     "react": "19.2.5",

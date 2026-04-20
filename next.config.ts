@@ -1,12 +1,9 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  devIndicators: {
-    appIsrStatus: false,
-  },
+  cacheComponents: true,
+  reactCompiler: true,
   experimental: {
-    ppr: true,
-    reactCompiler: true,
     serverActions: {
       bodySizeLimit: '5mb',
     },

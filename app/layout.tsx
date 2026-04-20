@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
+import { Suspense } from 'react';
 import { NowPlaying } from './now-playing';
 import { PlaybackProvider } from './playback-context';
 import { getAllPlaylists } from '@/lib/db/queries';
@@ -34,10 +35,12 @@ export default function RootLayout({
     <html lang="en" className={inter.className}>
       <body className="dark flex flex-col md:flex-row h-[100dvh] text-gray-200 bg-[#0A0A0A]">
         <PlaybackProvider>
-          <PlaylistProvider playlistsPromise={playlistsPromise}>
-            <OptimisticPlaylists />
-            {children}
-          </PlaylistProvider>
+          <Suspense fallback={null}>
+            <PlaylistProvider playlistsPromise={playlistsPromise}>
+              <OptimisticPlaylists />
+              {children}
+            </PlaylistProvider>
+          </Suspense>
           <NowPlaying />
           <PlaybackControls />
         </PlaybackProvider>
